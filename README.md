@@ -36,22 +36,22 @@ Law Doctor also identifies the visit dates for each medical records and stores i
 
 * Once all configuration is setup and application is fully up:
 * An end user would be able to upload one or many medical records from the browser
-  * App will communicate with API server -> get credentials and S3 upload path using STS for the specific user. Credentials are good for 15 minutes and will only work for user's IP address. This is accomplished using S3 bucket policy.
+  * App will communicate with API server -> get credentials and S3 upload path using STS for the specific user. Credentials are good for 15 minutes and will only work for user's IP address. This is accomplished using S3 bucket policy ```https://github.com/jbham/law_dr/blob/e7b263b08654b822a481bdc18c74b5d3f05a2fec/backend/app/app/crud/file.py#L144```.
   * App will show upload progress
   * As soon as the file is uploaded, app will communicate with 
-    * RDS to track full progress of the file processing
+    * REST API which communicates with RDS to track full progress of the file processing ```https://github.com/jbham/law_dr/blob/master/backend/app/app/crud/file.py```
     * Initiate lambda to start fetching files from S3 and start splitting them
-      * This lambda:
+      * This lambda ```https://github.com/jbham/law_dr/tree/master/backend/app/app/Lambda_functions/full_doc_splitter```:
         * updates RDS to track errors and progress of the file processing
         * pushes the split files back to S3 along with extracted text, which will be used by CTAKES processing, in separate txt files 
         * This lambda also pushes a message to SQS with payload related to what files to process
-  * SQS initiates a lambda which invokes the pipeline in CTAKES server (initially one; TODO: add auto scaling), depending on how many CORES are available for processing 
+  * SQS initiates a lambda ```https://github.com/jbham/law_dr/tree/master/backend/app/app/Lambda_functions/job_manager``` which invokes the pipeline in CTAKES server (initially one; TODO: add auto scaling), depending on how many CORES are available for processing.
   * CTAKES server fetches S3 documents based on the information submitted in SQS payload. Payload specifies whether CTAKES' Default or Full pipeline needs to be processed.
   * Once CTAKES pipeline completes, it:
     * upload all terms back to S3 as JSON
     * intiates lambda to connect JSON details to the actual PDF document
     * updates RDS will status report (error, success, etc). If there is an error, then error is stores in DB for later review.
-  * Lambda connects all terms/mentions of medically relevant information back to the original PDF document. This stitching of terms-to-pdf allows the user to navigate the complex information in an easy manner.
+  * Lambda ```https://github.com/jbham/law_dr/blob/master/backend/app/app/Lambda_functions/mentions_extractor_refactored.py``` connects all terms/mentions of medically relevant information back to the original PDF document. This stitching of terms-to-pdf allows the user to navigate the complex information in an easy manner.
     * It identifies Visit Dates of each medical records
     * It updates RDS with full PDF coordinates along with CTAKES terms
     * updates RDS will status report (error, success, etc). If there is an error, then error is stores in DB for later review.
