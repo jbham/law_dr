@@ -79,6 +79,11 @@ alembic revision --autogenerate -m "first push"
 alembic upgrade head
 ```
 
+This will create all database tables for the application needs.
+
+# Any other setup?
+Please see each folder (backend, frontend, ctakes) that requires its own setup.
+
 # Is this the most optimal setup?
 Of course not! This was the optimal setup for this project. Your mileage may vary. For instance, we could probably get rid of Natgateway to reduce cost and use some other AWS tech. However, for this use case, I did not get that far to bother.
 
