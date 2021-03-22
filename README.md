@@ -45,7 +45,7 @@ Law Doctor also identifies the visit dates for each medical records and stores i
         * updates RDS to track errors and progress of the file processing
         * pushes the split files back to S3 along with extracted text, which will be used by CTAKES processing, in separate txt files 
         * This lambda also pushes a message to SQS with payload related to what files to process
-  * SQS initiates a lambda ```https://github.com/jbham/law_dr/tree/master/backend/app/app/Lambda_functions/job_manager``` which invokes the pipeline in CTAKES server (initially one; TODO: add auto scaling), depending on how many CORES are available for processing.
+  * SQS initiates a [lambda](https://github.com/jbham/law_dr/tree/master/backend/app/app/Lambda_functions/job_manager) which invokes the pipeline in CTAKES server (initially one; TODO: add auto scaling), depending on how many CORES are available for processing.
   * CTAKES server fetches S3 documents based on the information submitted in SQS payload. Payload specifies whether CTAKES' Default or Full pipeline needs to be processed.
   * Once CTAKES pipeline completes, it:
     * upload all terms back to S3 as JSON
