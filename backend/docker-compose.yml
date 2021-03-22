@@ -1,0 +1,55 @@
+version: '3.3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend.dockerfile
+      args:
+        env: dev
+    volumes:
+      - ./app:/app
+    image: sf_backend_backend
+    ports:
+      - "80:80"
+    environment:
+      - "SECRET_KEY=${SECRET_KEY}"
+      - "SERVER_NAME=${SERVER_NAME}"
+      - "SERVER_HOST=${SERVER_HOST}"
+      - "BACKEND_CORS_ORIGINS=${BACKEND_CORS_ORIGINS}"
+      - "PROJECT_NAME=${PROJECT_NAME}"
+      - "SENTRY_DSN=${SENTRY_DSN}"
+      - "POSTGRES_SERVER=${POSTGRES_SERVER}"
+      - "POSTGRES_USER=${POSTGRES_USER}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}"
+      - "POSTGRES_DB=${POSTGRES_DB}"
+      - "FIRST_SUPERUSER=${FIRST_SUPERUSER}"
+      - "FIRST_SUPERUSER_PASSWORD=${FIRST_SUPERUSER_PASSWORD}"
+      - "USERS_OPEN_REGISTRATION=${USERS_OPEN_REGISTRATION}"
+      - "AWS_UPLOAD_BUCKET=${AWS_UPLOAD_BUCKET}"
+      - "AWS_UPLOAD_REGION=${AWS_UPLOAD_REGION}"
+      - "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}"
+      - "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}"
+      - "AWS_ROLE_ARN=${AWS_ROLE_ARN}"
+      - "AWS_ROLE_SESSION_NAME=${AWS_ROLE_SESSION_NAME}"
+      - "AWS_USER_POOL_ID=${AWS_USER_POOL_ID}"
+      - "AWS_USER_POOL_CLIENT_ID=${AWS_USER_POOL_CLIENT_ID}"
+      - "AWS_FULL_DOC_SPLITTER_LAMBDA=${AWS_FULL_DOC_SPLITTER_LAMBDA}"
+      - "AWS_SQS_Q_NAME=${AWS_SQS_Q_NAME}"
+
+#  celeryworker:
+#    build:
+#      context: ./backend
+#      dockerfile: celeryworker.dockerfile
+#      args:
+#        env: dev
+#  backend-tests:
+#    build:
+#      context: ./backend
+#      dockerfile: tests.dockerfile
+#      args:
+#        env: dev
+#  frontend:
+#    build:
+#      context: ./frontend
+#      args:
+#        FRONTEND_ENV: dev

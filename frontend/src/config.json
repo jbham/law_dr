@@ -1,0 +1,33 @@
+{
+  "appUrl": "http://127.0.0.1:8000/",
+  "loginUrl": {
+    "authenticate": "api/v1/login/access-token",
+    "tokenVerify": "api/token/verify/"
+  },
+  "user": {
+    "userListUrl": "api/v1/users/",
+    "userCreateUrl": "api/v1/users/"
+  },
+  "cases": {
+    "caseUrl": "api/v1/cases/",
+    "caseCreateUrl": "api/v1/cases/create/",
+    "caseMentions": "/searchmentions/",
+    "caseFiles": "/files/"
+  },
+  "file": {
+    "filePolicyUrl": "api/v1/file/filepolicy",
+    "dnFile": "api/v1/file/download",
+    "deleteFile": "api/v1/file/delete"
+  },
+  "search": {
+    "searchParent": "api/v1/search/",
+    "searchUrl": "facet",
+    "searchCategory": "category",
+    "visitdates": "visitdates/",
+    "vdt": "vdtxt",
+    "presetCatFilters": "presetcatfilters",
+    "listofpdfs": "listofpdfs",
+    "childfiles": "childfiles",
+    "pdfcords": "pdfcords"
+  }
+}

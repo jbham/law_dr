@@ -1,0 +1,58 @@
+// Pipeline for: sections, paragraphs, sentences, lists, entities and attributes, relations, temporal info, coreferences
+
+// set the thread count
+threads 100
+
+// Advanced Tokenization: Regex sectionization, BIO Sentence Detector (lumper), Paragraphs, Lists
+load pipers/TsFullTokenizerPipeline
+
+// Always need these ...
+add ContextDependentTokenizerAnnotator
+add concurrent.ThreadSafePosTagger
+
+// Chunkers
+load pipers/TsChunkerSubPipe
+
+// Default fast dictionary lookup
+set minimumSpan=2
+load pipers/TsDictionarySubPipe
+
+set STATUS_BOUNDARY_ANN_TYPE="org.apache.ctakes.typesystem.type.textsem.MedicationMention"
+add DrugMentionAnnotator
+
+
+// Cleartk Entity Attributes (negation, uncertainty, etc.)
+load pipers/TsAttributeCleartkSubPipe
+
+// I thought this would some additional type of negation but it does not look like anything else happened...so commenting for now
+// Add the context annotator for simple annotation properties
+// The default call sets it to detect negation
+add ContextAnnotator
+// It can also detect Status if you change some parameters from the defaults
+add ContextAnnotator ContextAnalyzerClass=org.apache.ctakes.necontexts.status.StatusContextAnalyzer ContextHitConsumerClass=org.apache.ctakes.necontexts.status.StatusContextHitConsumer MaxLeftScopeSize=10 MaxRightScopeSize=10
+
+
+// Entity Relations (degree/severity, anatomical location)
+load pipers/TsRelationSubPipe
+
+// Temporal (event, time, dtr, tlink)
+load pipers/TsTemporalSubPipe
+
+// Coreferences (e.g. patient = he)
+// we are more concerned with medical terms and visit dates rather he she him her...so disabling it
+load pipers/TsCorefSubPipe
+
+
+add TemplateFillerAnnotator
+
+// Html output
+set OutputDirectory=/Users/jaspalbhamra/Downloads
+add pretty.html.HtmlTextWriter
+
+package org.apache.ctakes.examples.ae
+add BodySideFinder
+
+
+
+
+/org.apache.ctakes.drugner.ae.DrugMentionAnnotator/STATUS_BOUNDARY_ANN_TYPE
