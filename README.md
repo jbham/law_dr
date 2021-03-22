@@ -68,7 +68,7 @@ NOTE:
 Folder | Purpose
 ------------ | -------------
 [backend](https://github.com/jbham/law_dr/tree/master/backend) | REST API that works with frontend. Uses FASTAPI
-ctakes | everything related to CTAKES. There are custom changes in this directory which are not part of original ctakes repo. Custom changes such document processing status, S3 file fetching and uploading, invoking lambda, etc
+[ctakes](https://github.com/jbham/law_dr/tree/master/ctakes) | everything related to CTAKES. There are custom changes in this directory which are not part of original ctakes repo. Custom changes such document processing status, S3 file fetching and uploading, invoking lambda, etc
 [frontend](https://github.com/jbham/law_dr/tree/master/frontend) | full blown ReactJS app that uses CoreUI React framework and AWS amplify.
 [Doc splitter](https://github.com/jbham/law_dr/tree/master/backend/app/app/Lambda_functions/full_doc_splitter) | Splits documents
 [CTAKTES terms-to-pdf](https://github.com/jbham/law_dr/tree/master/backend/app/app/Lambda_functions/mentions_extractor_refactored.py) | Attaches CTAKES term-to-pdf
