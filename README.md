@@ -2,7 +2,7 @@
 
 # Law Doctor
 
-Law Doctor is an end to end application which allows Lawyers to upload patient's medical records and process them via CTAKES' NLP. In addition, it allows users to upload medical records as one large file with ALL medical records or single medical record. If a large file is submitted, then Law Doctor will split the document based on "Chief Complaints" or arbitrary word(s) specified in UI. 
+Law Doctor is an end to end multi-tenant application which allows Lawyers to upload patient's medical records and process them via CTAKES' NLP. In addition, it allows users to upload medical records as one large file with ALL medical records or single medical record. If a large file is submitted, then Law Doctor will split the document based on "Chief Complaints" or arbitrary word(s) specified in UI. 
 
 Once the files are split and processed via CTAKES, Law Doctor attaches the medically relevant information, identified by CTAKES, back to the original document. This allows the end user to navigate the medically relevant information within the PDF in the browser.
 
@@ -17,6 +17,7 @@ Law Doctor also identifies the visit dates for each medical records and stores i
  # Who would use this software?
  
  * If you are familiar with CTAKES, then this project would sure add value. 
+ * Whoever deals with medical records, such as Lawyers, doctors, insurance companies, etc, and wants to extract medical information.
  * If you know Java, Python and Javascript along with different frameworks ReactJs and FastAPI. Also, it would help if you are familiar with AWS setup.
 
 # AWS Tecnologies used:
@@ -59,6 +60,23 @@ NOTE:
 * If an error is encountered in any step above, then the error's full stacktrace is recorded in RDS.
 * Two Lambdas, which are used for splitting documents and re-attaching CTAKES terms-to-pdf heavily uses PyMuPDF library with great performance.
 
+
+Folder | Purpose
+------------ | -------------
+backend | REST API that works with frontend. Uses FASTAPI
+ctakes | everything related to CTAKES. There are custom changes in this directory which are not part of original ctakes repo. Custom changes such document processing status, S3 file fetching and uploading, invoking lambda, etc
+frontend | full blown ReactJS app that using CoreUI React framework and AWS amplify.
+backend/app/app/Lambda_functions/full_doc_splitter | Splits documents
+backend/app/app/Lambda_functions/mentions_extractor_refactored.py | Attached CTAKES term-to-pdf
+backend/app/app/Lambda_functions/job_manager | Invokes CTAKES REST API to process document
+
+# How database is setup?
+This is accomplished in backend folder. Run below commands from ```backend/app/alembic```:
+
+```
+alembic revision --autogenerate -m "first push"
+alembic upgrade head
+```
 
 # Is this the most optimal setup?
 Of course not! This was the optimal setup for this project. Your mileage may vary. For instance, we could probably get rid of Natgateway to reduce cost and use some other AWS tech. However, for this use case, I did not get that far to bother.
