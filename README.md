@@ -13,6 +13,7 @@ Law Doctor also identifies the visit dates for each medical records and stores i
 
  Application is designed to be hosted on AWS. See diagram below:
  
+ ![Architecture Diagram](https://github.com/jbham/law_dr/blob/master/architecture_diagram.png)
  
  # Who would use this software?
  
