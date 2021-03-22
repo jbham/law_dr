@@ -31,6 +31,9 @@ Law Doctor also identifies the visit dates for each medical records and stores i
 * S3
 * VPC, Natgateway, security groups, etc
 * Autoscaling
+* Boto3
+* AWS Java SDK
+* AWS Amplify
 
 # How does this software works?
 
