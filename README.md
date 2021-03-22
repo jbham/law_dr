@@ -67,15 +67,15 @@ NOTE:
 
 Folder | Purpose
 ------------ | -------------
-backend | REST API that works with frontend. Uses FASTAPI
+[backend](https://github.com/jbham/law_dr/tree/master/backend) | REST API that works with frontend. Uses FASTAPI
 ctakes | everything related to CTAKES. There are custom changes in this directory which are not part of original ctakes repo. Custom changes such document processing status, S3 file fetching and uploading, invoking lambda, etc
-frontend | full blown ReactJS app that uses CoreUI React framework and AWS amplify.
-backend/app/app/Lambda_functions/full_doc_splitter | Splits documents
-backend/app/app/Lambda_functions/mentions_extractor_refactored.py | Attaches CTAKES term-to-pdf
-backend/app/app/Lambda_functions/job_manager | Invokes CTAKES REST API to process document
+[frontend](https://github.com/jbham/law_dr/tree/master/frontend) | full blown ReactJS app that uses CoreUI React framework and AWS amplify.
+[Doc splitter](https://github.com/jbham/law_dr/tree/master/backend/app/app/Lambda_functions/full_doc_splitter) | Splits documents
+[CTAKTES terms-to-pdf](https://github.com/jbham/law_dr/tree/master/backend/app/app/Lambda_functions/mentions_extractor_refactored.py) | Attaches CTAKES term-to-pdf
+[CTAKES cluster Lambda](https://github.com/jbham/law_dr/tree/master/backend/app/app/Lambda_functions/job_manager) | Invokes CTAKES REST API to process document
 
-# How database is setup?
-This is accomplished in backend folder. Run below commands from ```backend/app/alembic```:
+# How is database setup performed?
+Database setup is accomplished in [backend](https://github.com/jbham/law_dr/tree/master/backend) folder. Run below commands from ```backend/app/alembic```:
 
 ```
 alembic revision --autogenerate -m "first push"
