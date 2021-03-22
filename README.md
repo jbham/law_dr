@@ -54,14 +54,14 @@ Law Doctor also identifies the visit dates for each medical records and stores i
     * It updates RDS with full PDF coordinates along with CTAKES terms
     * updates RDS will status report (error, success, etc). If there is an error, then error is stores in DB for later review.
 
-NOTE: All S3 details, such as REGION, BUCKET, etc, Lambda name, SQS name are parameterized and are passed around via the payload submitted at different Stages.
-
-NOTE: If an error is encountered in any step above, then the error's full stacktrace is recorded in RDS
-
-NOTE: Two Lambdas, which are used for splitting documents and re-attaching CTAKES terms-to-pdf heavily uses PyMuPDF library with great performance.
-
+NOTE: 
+* All S3 details, such as REGION, BUCKET, etc, Lambda name, SQS name are parameterized and are passed around via the payload submitted at different Stages. These parameterized values get passed to REST API (backend folder) via docker via environment values.
+* If an error is encountered in any step above, then the error's full stacktrace is recorded in RDS.
+* Two Lambdas, which are used for splitting documents and re-attaching CTAKES terms-to-pdf heavily uses PyMuPDF library with great performance.
 
 
+# Is this the most optimal setup?
+Of course not! This was the optimal setup for this project. Your mileage may vary. For instance, we could probably get rid of Natgateway to reduce cost and use some other AWS tech. However, for this use case, I did not get that far to bother.
 
 
 
