@@ -6,7 +6,7 @@ Law Doctor is an end to end multi-tenant application which allows Lawyers to upl
 
 Once the files are split and processed via CTAKES, Law Doctor attaches the medically relevant information, identified by CTAKES, back to the original document. This allows the end user to navigate the medically relevant information within the PDF in the browser.
 
-Law Doctor also identifies the visit dates for each medical records and stores in data. Later, it present these dates as Timeline so the end user can navigate to different medical records from within the browsers. 
+Law Doctor also identifies the visit dates for each medical records and stores it in database. Later, it presents these dates as a Timeline so the end user can navigate to different medical records from within the browsers. It has full search capabilities built into searching every medically relevant information.
 
 
 # High level Architecture diagram
@@ -34,6 +34,14 @@ Law Doctor also identifies the visit dates for each medical records and stores i
 * Boto3
 * AWS Java SDK
 * AWS Amplify
+
+# Other technologies used
+* CTAKES
+* FASTAPI
+* PyMuPDF
+* ReactJS
+* Redux
+* CoreUI for React
 
 # How does this software works?
 
